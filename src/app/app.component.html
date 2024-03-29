@@ -5,9 +5,19 @@
     >! Nice to meet you.
   </p>
 
+  <h4>Component Input Example</h4>
+
   <div class="d-flex gap-5 text-nowrap">
     <app-person-table [person]="person0"></app-person-table>
     <app-person-table></app-person-table>
     <app-person-table [person]="person1"></app-person-table>
+  </div>
+
+  <h4>{{ "@for" }} Directive Example</h4>
+
+  <div class="d-flex flex-wrap text-nowrap gap-2">
+    @for (user of users; track user) {
+      <app-person-table [person]="user"></app-person-table>
+    }
   </div>
 </div>
