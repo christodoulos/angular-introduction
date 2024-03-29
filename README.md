@@ -1,5 +1,19 @@
 # Εισαγωγή στο Angular Framework
 
+## Βήμα 5: Event binding
+
+- Δέσμευση μεθόδου της κλάσης (event handler) στο συμβάν `event` του template με χρήση του `(eventName)="onEventName($event)"`
+
+  ```html
+  <button (click)="onAddPerson()">Add Person</button>
+  ```
+
+- Χρήση του event `input` από ένα HTML input element για ανάγνωση της τιμής του στην κλάση και στη συνέχεια πέρασμα πίσω στο template με χρήση της απλής δέσμευση με το `{{ <atribute_name > }}`
+
+  ```html
+  <input type="text" (input)="onInput($event)" />
+  ```
+
 ## Βήμα 4: @for Template Directive
 
 - Ορισμός χαρακτηριστικού `persons` τύπου `Person[]` στην κλάση `AppComponent` (πίνακας αντικειμένων τύπου `Person`)
