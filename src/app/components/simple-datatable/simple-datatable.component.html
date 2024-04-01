@@ -1,0 +1,22 @@
+<table class="table table-bordered table-striped text-wrap">
+  <thead>
+    <tr class="align-middle text-center small">
+      <th role="button">First Name</th>
+      <th role="button">Last Name</th>
+      <th role="button">Age</th>
+      <th role="button" class="d-none d-lg-table-cell">Email</th>
+      <th role="button" class="d-none d-lg-table-cell">Education</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of data; track row) {
+      <tr class="align-middle">
+        <td>{{ row.givenName }}</td>
+        <td>{{ row.surName }}</td>
+        <td>{{ row.age }}</td>
+        <td class="d-none d-lg-table-cell">{{ row.email }}</td>
+        <td class="d-none d-lg-table-cell">{{ row.education }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
