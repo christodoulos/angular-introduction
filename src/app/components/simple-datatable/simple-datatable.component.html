@@ -26,7 +26,7 @@
   </thead>
   <tbody>
     @for (row of data; track row) {
-      <tr class="align-middle">
+      <tr class="align-middle" (dblclick)="onPersonClicked(row)">
         <td>{{ row.givenName }}</td>
         <td>{{ row.surName }}</td>
         <td>{{ row.age }}</td>
