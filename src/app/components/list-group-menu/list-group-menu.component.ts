@@ -22,5 +22,9 @@ export class ListGroupMenuComponent {
       text: 'Component Output Example',
       routerLink: 'component-output-example',
     },
+    {
+      text: 'Template Driven Form Example',
+      routerLink: 'template-driven-form-example',
+    },
   ];
 }

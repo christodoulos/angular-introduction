@@ -5,6 +5,7 @@ import { ComponentInputExampleComponent } from './components/component-input-exa
 import { ForDirectiveExampleComponent } from './components/for-directive-example/for-directive-example.component';
 import { SimpleDatatableExampleComponent } from './components/simple-datatable-example/simple-datatable-example.component';
 import { ComponentOutputExampleComponent } from './components/component-output-example/component-output-example.component';
+import { TemplateDrivenFormExampleComponent } from './components/template-driven-form-example/template-driven-form-example.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'component-output-example',
     component: ComponentOutputExampleComponent,
+  },
+  {
+    path: 'template-driven-form-example',
+    component: TemplateDrivenFormExampleComponent,
   },
   { path: '', component: WelcomeComponent },
 ];
