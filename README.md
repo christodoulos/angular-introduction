@@ -1,5 +1,18 @@
 # Εισαγωγή στο Angular Framework
 
+## Βήμα 12: Reactive Forms
+
+- Ξεκινάμε με τα αντίστοιχα βήματα όπως στο βήμα 11.
+
+Η φόρμα ορίζεται στο component και συνδέεται με τα input του template. Ένας click handler μεταφέρει τα δεδομένα στο component και στη συνέχεια ένα EventEmitter μεταφέρει τα δεδομένα στο component γονέα.
+
+- Χρήση του `ReactiveFormsModule` στον πίνακα imports του component (εμπλουτίζει τα templates με επιπλέον HTML markup ώστε να μπορούν να συσχετιστούν με τα χαρακτηριστικά του component).
+- Χρήση των κλάσεων `FormGroup` και `FormControl` για τη δόμηση του αντικειμένου που παράγεται από τη φόρμα. Χρήση των `Validators`.
+- Δέσμευση του χαρακτηριστικού `form` του component με χρήση του `<form [formGroup]="form">...</form>`.
+- Σύνδεση του input με το `FormControl` με χρήση του `formControlName`.
+- Άμεση πρόσβαση στο πεδίο της φόρμας με το `form.get('όνομα πεδίου')`
+- Κατά το Submit το χαρακτηριστικό `form` έχει ήδη τιμή στο component.
+
 ## Βήμα 11: Template Driven Forms
 
 - Δημιουργία των `EpersonTemplateDrivenFormComponent` και `TemplateDrivenFormExampleComponent`.

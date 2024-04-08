@@ -1,0 +1,56 @@
+<div class="d-flex flex-column">
+  <h5>New Person Form</h5>
+  <form [formGroup]="form" class="d-flex flex-column">
+    <mat-form-field>
+      <mat-label> First Name </mat-label>
+      <input matInput type="text" formControlName="givenName" />
+      @if (form.get("givenName").invalid && form.get("givenName").touched) {
+        <mat-error> First Name is required </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Last Name </mat-label>
+      <input matInput type="text" formControlName="surName" />
+      @if (form.get("surName").invalid && form.get("surName").touched) {
+        <mat-error> Last Name is required </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Age </mat-label>
+      <input matInput type="text" formControlName="age" />
+      @if (form.get("age").invalid && form.get("age").touched) {
+        <mat-error> Age is missing or invalid </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Email </mat-label>
+      <input matInput type="text" formControlName="email" />
+      @if (form.get("email").invalid && form.get("email").touched) {
+        <mat-error> Email is missing or invalid </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Education</mat-label>
+      <mat-select type="text" formControlName="education">
+        <mat-option value="Some college, no degree"
+          >Some college, no degree</mat-option
+        >
+        <mat-option value="Master’s degree">Master’s degree</mat-option>
+        <mat-option value="Bachelor’s degree">Bachelor’s degree</mat-option>
+        <mat-option value="Associate’s degree">Associate’s degree</mat-option>
+        <mat-option value="High school diploma or equivalent"
+          >High school diploma or equivalent</mat-option
+        >
+        <mat-option value="No formal education">No formal education</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="onSubmit(form.value)"
+  >
+    Submit
+  </button>
+</div>
