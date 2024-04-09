@@ -1,5 +1,107 @@
 # Εισαγωγή στο Angular Framework
 
+## Βήμα 13: ΗTTP Client Service
+
+- Για να μπορέσουμε να χρησιμοποιήσουμε τον HTTP Client είναι απαραίτητη η επέμβαση στο `app.config.ts` :
+
+  ```typescript
+  import { ApplicationConfig } from "@angular/core";
+  import { provideRouter } from "@angular/router";
+
+  import { routes } from "./app.routes";
+  import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
+
+  import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+
+  export const appConfig: ApplicationConfig = {
+    providers: [provideRouter(routes), provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi())],
+  };
+  ```
+
+- Δημιουργία του `JokesService` με την εντολή:
+
+  ```bash
+  ng generate service shared/services/jokes
+  ```
+
+  - Συνηθίζουμε να ορίζουμε με `const` το URL του API που θα χρησιμοποιήσουμε:
+
+    ```typescript
+    const DAD_JOKES_API_URL = "https://icanhazdadjoke.com/";
+    const JACK_NORRIS_JOKES_API_URL = "https://api.chucknorris.io/jokes/random";
+    ```
+
+  - Το service είναι μια κλάση της Typescript με τον decorator `@Injectable({providedIn: 'root'})` που επιτρέπει την ενσωμάτωση του service σε όλα τα Angular components με χρήση του `inject`.
+
+  - Ο `HttpClient` είναι ένα έτοιμο Angular service που παρέχει τη δυνατότητα αποστολής HTTP requests και λήψης HTTP responses. Τα service της εφαρμογής μας ενσωματώνουν άμεσα τον `HttpClient` με τη χρήση του `inject`.
+
+- Δημιουργία του `HttpClientExampleComponent` για την επίδειξη της λειτουργίας του `HttpClient` μέσω του `JokesService`:
+
+```bash
+ng g c components/http-client-example
+```
+
+- Έλεγχος του τύπου των δεδομένων που επιστρέφουν οι κλήσεις των API με το `console.log`.
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { JokesService } from "src/app/shared/services/jokes.service";
+
+@Component({
+  selector: "app-http-client-example",
+  standalone: true,
+  imports: [],
+  templateUrl: "./http-client-example.component.html",
+  styleUrl: "./http-client-example.component.css",
+})
+export class HttpClientExampleComponent {
+  jokesService = inject(JokesService);
+
+  ngOnInit(): void {
+    this.jokesService.getDadJoke().subscribe((data) => {
+      console.log(data);
+    });
+    this.jokesService.getChuckNorrisJoke().subscribe((data) => {
+      console.log(data);
+    });
+  }
+}
+```
+
+- Δημιουργία των Interfaces `DadJoke` και `ChuckNorrisJoke` στο αρχείο `shared/interfaces/jokes.ts`:
+
+```typescript
+export interface DadJoke {
+  joke: string;
+}
+
+export interface ChuckNorrisJoke {
+  value: string;
+}
+```
+
+- Χρήση των interfaces για casting στον HttpClient:
+
+```typescript
+getDadJoke() {
+    return this.http.get<DadJoke>(DAD_JOKES_API_URL, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+  }
+
+  getChuckNorrisJoke() {
+    return this.http.get<ChuckNorrisJoke>(JACK_NORRIS_JOKES_API_URL, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+  }
+```
+
+- Ενημέρωση του μενού της εφαρμογής μας
+
 ## Βήμα 12: Reactive Forms
 
 - Ξεκινάμε με τα αντίστοιχα βήματα όπως στο βήμα 11.

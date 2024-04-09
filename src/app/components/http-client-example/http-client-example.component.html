@@ -1,0 +1,32 @@
+<h4>HTTP Client Example</h4>
+<h5>Random jokes as a service</h5>
+
+<div class="d-flex flex-column gap-2 mt-2 w-75">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Dad Joke </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="text-wrap">
+        {{ dadJoke }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="refreshDadJoke()">Refresh</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Chuck Norris Joke </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="text-wrap">
+        {{ chuckNorrisJoke }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="refreshChuckNorrisJoke()">Refresh</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
