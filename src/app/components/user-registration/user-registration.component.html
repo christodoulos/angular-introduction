@@ -1,0 +1,92 @@
+<h4>User Registration Example</h4>
+
+@if (registrationStatus.message === "Not attempted yet") {
+  <form
+    [formGroup]="form"
+    class="d-flex flex-column">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="givenName" />
+      @if (form.get("givenName").invalid && form.get("givenName").touched) {
+        <mat-error>First Name is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="surName" />
+      @if (form.get("surName").invalid && form.get("surName").touched) {
+        <mat-error>Last Name is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="email" />
+      @if (form.get("email").invalid && form.get("email").touched) {
+        <mat-error>Email is missing or invalid</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password" />
+      @if (form.get("password").invalid && form.get("password").touched) {
+        <mat-error>Password is missing or invalid</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="confirmPassword" />
+      @if (form.get("confirmPassword").hasError("passwordMismatch")) {
+        <mat-error>Passwords do not match</mat-error>
+      } @else {
+        @if (
+          form.get("confirmPassword").invalid &&
+          form.get("confirmPassword").touched
+        ) {
+          <mat-error>Password is missing or invalid</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+      (click)="onSubmit(form.value)">
+      Register
+    </button>
+  </form>
+} @else {
+  @if (registrationStatus.success) {
+    <div class="alert alert-success mt-2 w-50">
+      <strong>Success:</strong>
+      {{ registrationStatus.message }}
+    </div>
+  } @else {
+    <div class="alert alert-danger mt-2 w-50">
+      <strong>Error:</strong>
+      {{ registrationStatus.message }}
+    </div>
+  }
+  <button
+    mat-flat-button
+    color="primary"
+    class="mt-2"
+    (click)="registerAnotherUser()">
+    Register Another User
+  </button>
+}
