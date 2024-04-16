@@ -1,5 +1,54 @@
 # Εισαγωγή στο Angular Framework
 
+## Βήμα 14: User Registration Form and Service
+
+- Από το σημείο αυτό και στο εξής είναι απαραίτητο να έχετε εγκαταστήσει τη γλώσσα Python και να χρησιμοποιείτε το Python-Flask backend από το repository [angular-introduction-backend](https://github.com/christodoulos/angular-introduction-python-backend).
+
+- Δημιουργία των enviroments με την εντολή:
+
+  ```bash
+  ng generate environments
+  ```
+
+- Ενημέρωση των αρχείων `environment.development.ts` και `environment.ts`
+
+- Δημιουργία του `User` interface στο αρχείο `shared/interfaces/mongo-backend.ts`:
+
+  ```typescript
+  export interface User {
+    givenName: string;
+    surName: string;
+    email: string;
+    password: string;
+  }
+  ```
+
+- Δημιουργία του `UserService` με την εντολή:
+
+  ```bash
+  ng generate service shared/services/user
+  ```
+
+  - Η μέθοδος `registerUser` αποστέλλει στο backend τα πλήρη δεδομένα που αφορούν στην εγγραφή ενός νέου χρήστη
+  - Η μέθοδος `check_duplicate_email` ρωτά το backend αν το `email` που λαμβάνει σαν όρισμα χρησιμοποιείται ήδη σε κάποια εγγραφή στη βάση.
+
+- Δημιουργία του `UserRegistrationComponent` που υλοποιεί μια reactive form για τη διαδικασία του registration:
+
+  - Χρησιμοποιεί το `UserService` με τη χρήση του `inject`,
+  - Αρχικοποιεί το `registrationStatus`
+  - Ορίζει τη φόρμα του registration με δύο πεδία για το password που θα πρέπει να λάβουν από το χρήστη ακριβώς το ίδιο περιεχόμενο
+  - Δεύτερο όρισμα στον ορισμό της φόρμας μέσω του `FormGroup` είναι ο **συνολικός validator** της φόρμας, στην περίπτωσή μας η μέθοδος της κλάσης που εξετάζει αν τα δύο password input συμπίπτουν.
+    - Στην περίπτωση εντοπισμού λάθους σε κάποιο input, ο Validator επιστρέφει ένα object με ένα κλειδί ενδεικτικό του λάθους
+    - To κλειδί αυτό μπορεί μετά να χρησιμοποιηθεί στο template για να εμφανιστεί κατάλληλο μήνυμα λάθους
+
+- Στην υποβολή της φόρμας χρησιμοποιείται το `UserService` για να υποβάλλει στo backend τα δεδομένα της φόρμας. Η εγγραφή στην απάντηση του backend ξεχωρίζει τις περιπτώσεις της απάντησης του backend με τα callbacks στα χαρακτηριστικά `next` και `error`:
+
+  - `next`: το callback που καλείται όταν στο backend στείλει HTTP response `20*`.
+  - `error`: το callback που καλείται όταν το backend στείλει HTTP reponse `40*` ή `50*`.
+  - Ανάλογα θέτουμε το `registrationStatus` για να έχουμε τον αντίστοιχο έλεγχο στο template.
+
+- Χρήση του backend για τον έλεγχο ύπαρξης duplicate email στη βάση και χρήση της πληροφορίας κατά το event `blur` για να γίνει το πεδίο email invalid.
+
 ## Βήμα 13: ΗTTP Client Service
 
 - Για να μπορέσουμε να χρησιμοποιήσουμε τον HTTP Client είναι απαραίτητη η επέμβαση στο `app.config.ts` :
@@ -319,7 +368,9 @@ getDadJoke() {
 - Χρήση του event `input` από ένα HTML input element για ανάγνωση της τιμής του στην κλάση και στη συνέχεια πέρασμα πίσω στο template με χρήση της απλής δέσμευση με το `{{ <atribute_name > }}`
 
   ```html
-  <input type="text" (input)="onInput($event)" />
+  <input
+    type="text"
+    (input)="onInput($event)" />
   ```
 
 ## Βήμα 4: @for Template Directive
