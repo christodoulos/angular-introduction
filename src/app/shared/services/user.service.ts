@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { User } from '../interfaces/user';
+import { Credentials, LoggedInUser, User } from '../interfaces/user';
 
 const API_URL = `${environment.apiURL}/user`;
 
@@ -11,6 +11,18 @@ const API_URL = `${environment.apiURL}/user`;
 export class UserService {
   http: HttpClient = inject(HttpClient);
 
+  user = signal<LoggedInUser | null>(null);
+
+  constructor() {
+    effect(() => {
+      if (this.user()) {
+        console.log('USer loggedin', this.user().fullname);
+      } else {
+        console.log('No user Logged In');
+      }
+    });
+  }
+
   registerUser(user: User) {
     return this.http.post<{ msg: string }>(`${API_URL}/register`, user);
   }
@@ -18,6 +30,13 @@ export class UserService {
   check_duplicate_email(email: string) {
     return this.http.get<{ msg: string }>(
       `${API_URL}/check_duplicate_email/${email}`,
+    );
+  }
+
+  loginUser(credentials: Credentials) {
+    return this.http.post<{ access_token: string }>(
+      `${API_URL}/login`,
+      credentials,
     );
   }
 }
