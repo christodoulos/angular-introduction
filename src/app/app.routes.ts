@@ -12,6 +12,7 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { RestrictedContentExampleComponent } from './components/restricted-content-example/restricted-content-example.component';
 import { authGuard } from './shared/guards/auth.guard';
 import { UserLoginComponent } from './components/user-login/user-login.component';
+import { FunForNerdsComponent } from './components/fun-for-nerds/fun-for-nerds/fun-for-nerds.component';
 
 export const routes: Routes = [
   {
@@ -53,5 +54,6 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   { path: 'login', component: UserLoginComponent },
+  { path: 'fun-for-nerds', component: FunForNerdsComponent },
   { path: '', component: WelcomeComponent },
 ];
