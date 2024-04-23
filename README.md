@@ -1,5 +1,22 @@
 # Εισαγωγή στο Angular Framework
 
+## Βήμα 17: CRUD Example Scaffolding
+
+- Δημιουργία των component για το CRUD Example:
+
+  ```bash
+  ng g c components/crud/crud-dashboard
+  ng g c components/crud/crud-navbar
+  ng g c components/crud/crud-create-example
+  ng g c components/crud/crud-read-example
+  ng g c components/crud/crud-update-example
+  ng g c components/crud/crud-delete-example
+  ```
+
+- Ενημέρωση του κεντρικού μενού της εφαρμογής για το path `crud-example` προς το `CrudDashboardComponent`
+
+- Οι επιλογές του CRUD γίνονται από το μενού του `CrudNavbarComponent`
+
 ## Βήμα 16: Υλοποίηση της άσκησης Fun for Nerds
 
 ## Βήμα 15: User Authentication
